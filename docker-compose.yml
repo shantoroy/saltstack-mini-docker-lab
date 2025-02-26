@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  salt-master:
+    image: saltstack/salt:3005
+    container_name: salt-master
+    ports:
+      - "4505:4505"
+      - "4506:4506"
+    volumes:
+      - ./master/config:/etc/salt
+      - ./master/salt/salt:/srv/salt
+      - ./master/salt/pillar:/srv/pillar
+    networks:
+      - salt-network
+
+  salt-minion1:
+    image: saltstack/salt:3005
+    container_name: salt-minion1
+    environment:
+      - SALT_MINION_ID=minion1
+    volumes:
+      - ./minion1/config:/etc/salt
+    networks:
+      - salt-network
+    depends_on:
+      - salt-master
+
+  salt-minion2:
+    image: saltstack/salt:3005
+    container_name: salt-minion2
+    environment:
+      - SALT_MINION_ID=minion2
+    volumes:
+      - ./minion2/config:/etc/salt
+    networks:
+      - salt-network
+    depends_on:
+      - salt-master
+
+networks:
+  salt-network:
+    driver: bridge
