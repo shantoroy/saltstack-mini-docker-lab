@@ -31,7 +31,7 @@ Before running this project, ensure you have the following installed on your mac
 ## Setup and Usage
 #### Clone the Repository
 ```bash
-git clone https://github.com/your-username/saltstack-mini-docker-lab.git
+git clone https://github.com/shantoroy/saltstack-mini-docker-lab.git
 cd saltstack-mini-docker-lab
 ```
 #### Start the Environment
